@@ -1,7 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { Form, Input, Button, Checkbox, message } from "antd";
-import Title from "antd/lib/skeleton/Title";
 
 
 const Login = () => {

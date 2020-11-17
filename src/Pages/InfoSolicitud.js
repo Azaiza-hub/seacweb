@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Table, Space, Button, Modal, Spin } from "antd";
-import { Card } from 'antd';
+import { Spin, Card } from "antd";
 import { useParams } from "react-router-dom";
 
 
@@ -15,7 +14,7 @@ const InfoSolicitud = () => {
             .then(res => {
                 setSolicitud(res);
             });
-    }, []);
+    }, [id]);
     useEffect(() => {
         if (solicitud) {
             console.log(JSON.stringify({ ...solicitud, estado: 'Abierta' }));
@@ -29,7 +28,7 @@ const InfoSolicitud = () => {
                 .catch(error => console.error('Error:', error))
                 .then(response => console.log('Success:', response));
         }
-    }, [solicitud]);
+    }, [solicitud, url]);
 
     if (!solicitud) {
         return <Spin></Spin>
@@ -44,7 +43,7 @@ const InfoSolicitud = () => {
             <p><b>Atendido por: Administrador</b></p>
             <p><b>Fecha: </b>{solicitud.fecha}</p>
             <div style={{ display: "flex", width: "100%", justifyContent: "center" }}>
-                <img src={`data:image/png;base64,${solicitud.imagen}`} style={{ width: "100px", height: "auto" }} />
+                <img alt="solicitudImagen" src={`data:image/png;base64,${solicitud.imagen}`} style={{ width: "100px", height: "auto"}} />
             </div>
         </Card>
     )
