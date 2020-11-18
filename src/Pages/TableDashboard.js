@@ -3,13 +3,12 @@ import { Table, Space, Button, Modal } from "antd";
 import moment from "moment";
 import { useHistory } from "react-router-dom";
 
-
 const editFecha = (solicitud) => {
   return {
     ...solicitud,
-    fecha: moment(solicitud.fecha).format('DD-MM-YYYY')
-  }
-}
+    fecha: moment(solicitud.fecha).format("DD-MM-YYYY"),
+  };
+};
 
 const TableDashboard = (props) => {
   const history = useHistory();
@@ -18,7 +17,7 @@ const TableDashboard = (props) => {
   useEffect(() => {
     fetch("https://seac-backend.azurewebsites.net/solicitudes")
       .then((res) => res.json())
-      .then((data) => data.map(i => editFecha(i)))
+      .then((data) => data.map((i) => editFecha(i)))
       .then((dt) => {
         setList(dt);
       });
@@ -28,6 +27,8 @@ const TableDashboard = (props) => {
     {
       title: "Numero",
       dataIndex: "id",
+      sorter: (a, b) => a.id - b.id,
+      sortDirections: ["descend", "ascend"],
     },
     {
       title: "Fecha",
