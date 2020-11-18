@@ -1,21 +1,33 @@
 import React, { useState, useEffect } from "react";
 import { Table, Space, Button, Modal } from "antd";
+import moment from "moment";
 import { useHistory } from "react-router-dom";
 
 
-
+const editFecha = (solicitud) => {
+  return {
+    ...solicitud,
+    fecha: moment(solicitud.fecha).format('DD-MM-YYYY')
+  }
+}
 
 const TableDashboard = (props) => {
   const history = useHistory();
   const [open, setOpen] = useState(false);
-  const [list,setList] = useState([]);
+  const [list, setList] = useState([]);
   useEffect(() => {
     fetch("https://seac-backend.azurewebsites.net/solicitudes")
-    .then(res=>res.json())
-    .then(res=>{ 
-      setList(res);     
-    });
-  },[]);
+      .then((res) => res.json())
+      .then((data) => data.map(i => editFecha(i)))
+      .then((dt) => {
+        setList(dt);
+      });
+  }, []);
+
+  console.group("list");
+  console.log(list);
+  console.groupEnd();
+
   const columns = [
     {
       title: "Numero",
@@ -52,9 +64,8 @@ const TableDashboard = (props) => {
   ];
   return (
     <>
-      <Table dataSource={list} columns={columns} loading={list.length===0} />
+      <Table dataSource={list} columns={columns} loading={list.length === 0} />
       <Modal
-        
         title="Informacion de solicitud"
         visible={open}
         onOk={() => setOpen(false)}

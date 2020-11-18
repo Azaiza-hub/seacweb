@@ -5,7 +5,7 @@ const Dashboard = () => {
   return (
     <div
       style={{
-        width: "70vw",
+        width: "80vw",
         minHeight: "50vh",
         borderRadius: "15px",
         background: "white",

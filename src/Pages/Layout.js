@@ -9,8 +9,9 @@ const Layout = ({ children }) => {
         justifyContent: "center",
         alignItems: "center",
         width: "100vw",
-        height: "100vh",
+        minHeight: "100vh",
         background: "#3A9FF1",
+        paddingBottom: '2rem',
       }}
     >
       <div style={{
