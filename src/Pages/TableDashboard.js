@@ -24,10 +24,6 @@ const TableDashboard = (props) => {
       });
   }, []);
 
-  console.group("list");
-  console.log(list);
-  console.groupEnd();
-
   const columns = [
     {
       title: "Numero",

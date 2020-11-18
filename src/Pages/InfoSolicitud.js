@@ -31,7 +31,7 @@ const InfoSolicitud = () => {
     }, [solicitud, url]);
 
     if (!solicitud) {
-        return <Spin></Spin>
+        return <Spin size="large"></Spin>
     }
     return (
         <Card title="Informacion de la Solicitud" style={{ width: 300, margin: "auto" }}>
