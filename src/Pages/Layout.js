@@ -26,9 +26,10 @@ const Layout = ({ children }) => {
         }}
         ><b>Sistema de Emergencia de Ayuda al Ciudadano</b></div>
         {children}
+        
       </div>
-    
-    </div>
+      
+    </div>    
   );
 };
 
