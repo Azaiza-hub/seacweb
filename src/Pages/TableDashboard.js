@@ -50,6 +50,14 @@ const TableDashboard = (props) => {
       dataIndex: "estado",
     },
     {
+      title: "Tipo",
+      dataIndex: "clasificacion",
+    },
+    {
+      title: "Sentimentalismo",
+      dataIndex: "sentimentalismo",
+    },
+    {
       title: "",
       dataIndex: "actions",
       render: (text, record) => (
