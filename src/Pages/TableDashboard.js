@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Table, Space, Button, Modal } from "antd";
 import moment from "moment";
+import useInterval from "@use-it/interval";
 import { useHistory } from "react-router-dom";
 
 const editFecha = (solicitud) => {
@@ -14,6 +15,16 @@ const TableDashboard = (props) => {
   const history = useHistory();
   const [open, setOpen] = useState(false);
   const [list, setList] = useState([]);
+
+  useInterval(() => {
+    fetch("https://seac-backend.azurewebsites.net/solicitudes")
+      .then((res) => res.json())
+      .then((data) => data.map((i) => editFecha(i)))
+      .then((dt) => {
+        setList(dt);
+      });
+  }, 10000);
+
   useEffect(() => {
     fetch("https://seac-backend.azurewebsites.net/solicitudes")
       .then((res) => res.json())
@@ -68,8 +79,8 @@ const TableDashboard = (props) => {
         </Space>
       ),
     },
-  ];  
-  
+  ];
+
   return (
     <>
       <Table dataSource={list} columns={columns} loading={list.length === 0} />
@@ -79,10 +90,13 @@ const TableDashboard = (props) => {
         onOk={() => setOpen(false)}
         onCancel={() => setOpen(false)}
       ></Modal>
-      <Button style={{top:'-50px',borderColor:'#3A9FF1'}}><a href="https://app.powerbi.com/reportEmbed?reportId=df7906e7-054f-43b6-b926-cedbbe56a720&groupId=b1857c0f-e9df-41ed-b878-499c05a0ce1d&autoAuth=true&ctid=843d9746-0674-48bf-a402-a45cd06f541a&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXNvdXRoLWNlbnRyYWwtdXMtcmVkaXJlY3QuYW5hbHlzaXMud2luZG93cy5uZXQvIn0%3D">Reporte</a></Button>
+      <Button style={{ top: "-50px", borderColor: "#3A9FF1" }}>
+        <a href="https://app.powerbi.com/reportEmbed?reportId=df7906e7-054f-43b6-b926-cedbbe56a720&groupId=b1857c0f-e9df-41ed-b878-499c05a0ce1d&autoAuth=true&ctid=843d9746-0674-48bf-a402-a45cd06f541a&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXNvdXRoLWNlbnRyYWwtdXMtcmVkaXJlY3QuYW5hbHlzaXMud2luZG93cy5uZXQvIn0%3D">
+          Reporte
+        </a>
+      </Button>
     </>
   );
 };
-
 
 export default TableDashboard;
